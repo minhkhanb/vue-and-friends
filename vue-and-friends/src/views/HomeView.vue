@@ -28,8 +28,10 @@ enum enumStatus {
 interface Card {
   id: string;
   name: string;
-  status: string;
+  status: enumStatus;
 }
+
+const cardNum = 40;
 
 export default defineComponent({
   name: "HomeView",
@@ -37,6 +39,7 @@ export default defineComponent({
     return {
       products: [] as Card[],
       pair: [],
+      haveIt: [] as number[],
     };
   },
 
@@ -45,10 +48,44 @@ export default defineComponent({
   },
 
   methods: {
+    generateUniqueRandom(n: number): number {
+      //Generate random number
+      let randomNumber = (Math.random() * n).toFixed();
+
+      //Coerce to number by boxing
+      const boxNumber = Number(randomNumber);
+
+      if (!this.haveIt.includes(boxNumber)) {
+        this.haveIt.push(boxNumber);
+
+        return boxNumber;
+      } else {
+        if (this.haveIt.length < n) {
+          //Recursively generate number
+          return this.generateUniqueRandom(n);
+        } else {
+          console.log("No more numbers available.");
+          return 0;
+        }
+      }
+    },
+
+    shuffle(arr: number[]): number[] {
+      return arr.sort(() => 0.5 - Math.random());
+    },
+
     getProducts() {
-      this.products = Array.from(Array(10)).map((item, index) => ({
+      const cardsGenerated: number[] = Array.from(Array(cardNum / 2)).map(() =>
+        this.generateUniqueRandom(cardNum)
+      );
+
+      const boxes: number[] = this.shuffle(
+        cardsGenerated.concat(cardsGenerated)
+      );
+
+      this.products = boxes.map((box, index) => ({
         id: index.toString(),
-        name: index.toString(),
+        name: box.toString(),
         status: enumStatus.Start,
       }));
     },
@@ -66,6 +103,11 @@ export default defineComponent({
       }
     },
   },
+  watch: {
+    products(value: string) {
+      console.log("products", JSON.stringify(value, null, 2));
+    },
+  },
 });
 </script>
 
@@ -80,11 +122,12 @@ body {
 }
 
 .scene {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border: 1px solid #ccc;
-  margin: 0;
+  margin: 1px;
   perspective: 600px;
+  user-select: none;
 }
 
 .card {
@@ -100,7 +143,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  line-height: 200px;
+  line-height: 150px;
   color: white;
   text-align: center;
   font-weight: bold;
@@ -109,11 +152,11 @@ body {
 }
 
 .card__face--front {
-  background: red;
+  background: #5d4e9b;
 }
 
 .card__face--back {
-  background: blue;
+  background: #0095ff;
   transform: rotateY(180deg);
 }
 
