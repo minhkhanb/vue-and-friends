@@ -45,6 +45,7 @@ export default defineComponent({
   margin: 1px;
   perspective: 600px;
   user-select: none;
+  animation: anim 0.5s;
 }
 
 .card {

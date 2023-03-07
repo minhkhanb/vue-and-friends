@@ -23,6 +23,12 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
           import("../sections/Games/Collection/Flipped/Flipped.vue"),
       },
+      {
+        path: "animated",
+        name: "animated",
+        component: () =>
+          import("../sections/Games/Collection/Anim/AnimGame.vue"),
+      },
     ],
   },
   {

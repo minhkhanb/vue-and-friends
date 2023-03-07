@@ -12,6 +12,16 @@
           </div>
         </div>
       </div>
+
+      <div class="game--card">
+        <div class="card">
+          <div class="card__face card__face--front">
+            <RouterLink class="link" to="/game-play/animated">
+              Anim
+            </RouterLink>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -64,5 +74,6 @@ export default defineComponent({
 .link {
   color: white;
   text-decoration: none;
+  display: block;
 }
 </style>

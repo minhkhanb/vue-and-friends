@@ -18,7 +18,7 @@ import { Card, enumStatus } from "@/utils/games/flipped";
 import { defineComponent } from "vue";
 import FlippedBox from "./FlippedBox.vue";
 
-const cardNum = 8;
+const cardNum = 40;
 
 export default defineComponent({
   name: "FlippedSection",
@@ -69,7 +69,7 @@ export default defineComponent({
     },
 
     shuffle(arr: number[]): number[] {
-      return arr.sort(() => 0.5 - Math.random());
+      return arr.sort(() => Math.round(Math.random()) - 0.5);
     },
 
     getProducts() {
@@ -106,6 +106,8 @@ export default defineComponent({
     },
     reverseFlip(card: Card | null) {
       if (!card) return;
+
+      this.lockBoard = true;
 
       const currentCard = this.products.find((item) => item.id === card.id);
 
@@ -178,9 +180,6 @@ export default defineComponent({
     },
     secondCard(value: Card) {
       console.log("secondCard", JSON.parse(JSON.stringify(value)));
-    },
-    score(value: number) {
-      console.log("score: ", value);
     },
   },
 });
