@@ -5,7 +5,11 @@
     <div class="games">
       <div class="game--card">
         <div class="card">
-          <div class="card__face card__face--front">Flipped</div>
+          <div class="card__face card__face--front">
+            <RouterLink class="link" to="/game-play/flipped">
+              Flipped
+            </RouterLink>
+          </div>
         </div>
       </div>
     </div>
@@ -55,5 +59,10 @@ export default defineComponent({
 
 .card__face--front {
   background: #5d4e9b;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
 }
 </style>

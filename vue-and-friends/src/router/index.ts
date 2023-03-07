@@ -21,7 +21,7 @@ const routes: Array<RouteRecordRaw> = [
         path: "flipped",
         name: "flipped",
         component: () =>
-          import("../views/Games/Collection/Flipped/Flipped.vue"),
+          import("../sections/Games/Collection/Flipped/Flipped.vue"),
       },
     ],
   },

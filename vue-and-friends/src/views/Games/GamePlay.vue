@@ -1,6 +1,5 @@
 <template>
   <div class="game-play">
-    <h1>Playing</h1>
     <router-view></router-view>
   </div>
 </template>
