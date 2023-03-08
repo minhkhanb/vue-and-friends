@@ -1,0 +1,1 @@
+init Vue3 + Typscript + Scss + Eslint integrate Prettier + unit testing + automation testing
